@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 
 const POSPage = () => {
@@ -44,6 +44,12 @@ const POSPage = () => {
   ]);
   const [productChoices, setProductChoices] = useState([]);
 
+  useEffect(() => {
+    if (productChoices.length > 0) {
+      // for (product)
+    }
+  }, [productChoices]);
+
   const handleAddProduct = (product) => {
     product.quantity = 1;
     product.subtotal = 1 * product.price;
@@ -54,6 +60,7 @@ const POSPage = () => {
     setProductChoices((values) => {
       let temp = [...values];
       temp[i][e.target.name] = e.target.value;
+      temp[i].subtotal = parseInt(e.target.value) * temp[i].price;
       return temp;
     });
   };
@@ -66,7 +73,9 @@ const POSPage = () => {
           {productChoices.map((product, index) => (
             <ListGroup.Item key={index} className="">
               <p className="text-truncate">{product.title}</p>
-              <div className="mb-2">{product.price}</div>
+              <div className="mb-2">
+                {product.price} x {product.quantity} = {product.subtotal}
+              </div>
               <Form.Control
                 type="number"
                 name="quantity"
@@ -98,7 +107,6 @@ const POSPage = () => {
 
   return (
     <>
-      {JSON.stringify(productChoices)}
       <Container className="mt-4">
         <Row>
           <Col md={8}>
