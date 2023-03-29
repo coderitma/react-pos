@@ -42,6 +42,11 @@ const POSPage = () => {
       },
     },
   ]);
+  const [productChoices, setProductChoices] = useState([]);
+
+  const handleAddProduct = (product) => {
+    setProductChoices((values) => [...values, product]);
+  };
 
   const inlineTransaction = () => {
     return (
@@ -57,12 +62,15 @@ const POSPage = () => {
     );
   };
 
-  const inlineCard = ({ id, title, price }) => {
+  const inlineCard = (product) => {
+    const { id, price, title } = product;
     return (
-      <Col key={id} md={3}>
-        <Card>
+      <Col key={id} md={4}>
+        <Card
+          style={{ cursor: "pointer" }}
+          onClick={() => handleAddProduct(product)}>
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title className="text-truncate">{title}</Card.Title>
             <p>{price}</p>
           </Card.Body>
         </Card>
@@ -72,6 +80,7 @@ const POSPage = () => {
 
   return (
     <>
+      {JSON.stringify(productChoices)}
       <Container className="mt-4">
         <Row>
           <Col md={8}>
