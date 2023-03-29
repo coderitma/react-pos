@@ -57,12 +57,13 @@ const POSPage = () => {
     );
   };
 
-  const inlineCard = (productName) => {
+  const inlineCard = ({ id, title, price }) => {
     return (
-      <Col md={3}>
+      <Col key={id} md={3}>
         <Card>
           <Card.Body>
-            <Card.Title>{productName}</Card.Title>
+            <Card.Title>{title}</Card.Title>
+            <p>{price}</p>
           </Card.Body>
         </Card>
       </Col>
@@ -74,11 +75,7 @@ const POSPage = () => {
       <Container className="mt-4">
         <Row>
           <Col md={8}>
-            <Row>
-              {inlineCard("Produk 1")}
-              {inlineCard("Produk 2")}
-              {inlineCard("Produk 3")}
-            </Row>
+            <Row>{products.map((product) => inlineCard(product))}</Row>
           </Col>
           <Col md={4}>{inlineTransaction()}</Col>
         </Row>
