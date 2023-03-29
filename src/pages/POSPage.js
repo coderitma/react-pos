@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 
 const POSPage = () => {
   const [products, setProducts] = useState([
@@ -54,8 +54,10 @@ const POSPage = () => {
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
           {productChoices.map((product) => (
-            <ListGroup.Item>
-              {product.title} {product.price}
+            <ListGroup.Item className="">
+              <p className="text-truncate">{product.title}</p>
+              <div className="mb-2">{product.price}</div>
+              <Form.Control value={product.quantity} />
             </ListGroup.Item>
           ))}
         </ListGroup>
@@ -64,6 +66,7 @@ const POSPage = () => {
   };
 
   const inlineCard = (product) => {
+    product.quantity = 1;
     const { id, price, title } = product;
     return (
       <Col key={id} md={4}>
