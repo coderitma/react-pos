@@ -1,5 +1,5 @@
 const helperReadableCurrency = (num) => {
-  let n = parseInt(num).toFixed(0).toLocaleString("id-ID", {
+  let n = parseInt(num).toLocaleString("id-ID", {
     style: "currency",
     currency: "IDR",
   });

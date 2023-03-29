@@ -11,6 +11,8 @@ import {
 import { helperReadableCurrency } from "../utils/helpers";
 import { FaTrash } from "react-icons/fa";
 
+const PPN = 0.11;
+
 const POSPage = () => {
   const [products, setProducts] = useState([
     {
@@ -53,10 +55,16 @@ const POSPage = () => {
     },
   ]);
   const [productChoices, setProductChoices] = useState([]);
+  const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
     if (productChoices.length > 0) {
-      // for (product)
+      let sum = 0;
+      productChoices.map((product) => {
+        sum = sum + product.subtotal;
+      });
+      sum = sum * PPN + sum;
+      setGrandTotal(sum);
     }
   }, [productChoices]);
 
@@ -89,12 +97,13 @@ const POSPage = () => {
       <Card>
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
+          <ListGroup.Item>{helperReadableCurrency(grandTotal)}</ListGroup.Item>
           {productChoices.map((product, index) => (
             <ListGroup.Item key={index} className="">
               <p className="text-truncate">{product.title}</p>
               <div className="mb-2">
                 {helperReadableCurrency(product.price)} x {product.quantity} ={" "}
-                {helperReadableCurrency(product.subtotal)}
+                {product.subtotal}
               </div>
               <Form.Control
                 type="number"
