@@ -53,10 +53,11 @@ const POSPage = () => {
       <Card>
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
-          <ListGroup.Item>Cras justo odio</ListGroup.Item>
-          <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-          <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-          <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+          {productChoices.map((product) => (
+            <ListGroup.Item>
+              {product.title} {product.price}
+            </ListGroup.Item>
+          ))}
         </ListGroup>
       </Card>
     );
@@ -80,7 +81,6 @@ const POSPage = () => {
 
   return (
     <>
-      {JSON.stringify(productChoices)}
       <Container className="mt-4">
         <Row>
           <Col md={8}>
