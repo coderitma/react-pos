@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 import { helperReadableCurrency } from "../utils/helpers";
+import { FaTrash } from "react-icons/fa";
 
 const POSPage = () => {
   const [products, setProducts] = useState([
@@ -57,6 +66,15 @@ const POSPage = () => {
     setProductChoices((values) => [...values, product]);
   };
 
+  const handleDeleteProduct = (product) => {
+    setProductChoices((values) => {
+      let temp = [...values];
+      let index = temp.indexOf(product);
+      temp.splice(index, 1);
+      return temp;
+    });
+  };
+
   const handleInputProductChoices = (e, i) => {
     setProductChoices((values) => {
       let temp = [...values];
@@ -84,6 +102,12 @@ const POSPage = () => {
                 onChange={(e) => handleInputProductChoices(e, index)}
                 value={product.quantity || ""}
               />
+              <Button
+                onClick={() => handleDeleteProduct(product)}
+                variant="outline-danger"
+                size="sm">
+                <FaTrash />
+              </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
