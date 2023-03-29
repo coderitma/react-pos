@@ -1,6 +1,20 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, ListGroup, Row } from "react-bootstrap";
 
 const POSPage = () => {
+  const inlineTransaction = () => {
+    return (
+      <Card>
+        <Card.Header>Transaksi</Card.Header>
+        <ListGroup variant="flush">
+          <ListGroup.Item>Cras justo odio</ListGroup.Item>
+          <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+          <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+          <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+        </ListGroup>
+      </Card>
+    );
+  };
+
   const inlineCard = (productName) => {
     return (
       <Col md={3}>
@@ -15,7 +29,7 @@ const POSPage = () => {
 
   return (
     <>
-      <Container>
+      <Container className="mt-4">
         <Row>
           <Col md={8}>
             <Row>
@@ -24,7 +38,7 @@ const POSPage = () => {
               {inlineCard("Produk 3")}
             </Row>
           </Col>
-          <Col md={4}>Panel Transaksi</Col>
+          <Col md={4}>{inlineTransaction()}</Col>
         </Row>
       </Container>
     </>
