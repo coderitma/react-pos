@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
+import { helperReadableCurrency } from "../utils/helpers";
 
 const POSPage = () => {
   const [products, setProducts] = useState([
@@ -74,7 +75,8 @@ const POSPage = () => {
             <ListGroup.Item key={index} className="">
               <p className="text-truncate">{product.title}</p>
               <div className="mb-2">
-                {product.price} x {product.quantity} = {product.subtotal}
+                {helperReadableCurrency(product.price)} x {product.quantity} ={" "}
+                {helperReadableCurrency(product.subtotal)}
               </div>
               <Form.Control
                 type="number"
