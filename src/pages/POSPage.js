@@ -45,7 +45,17 @@ const POSPage = () => {
   const [productChoices, setProductChoices] = useState([]);
 
   const handleAddProduct = (product) => {
+    product.quantity = 1;
+    product.subtotal = 1 * product.price;
     setProductChoices((values) => [...values, product]);
+  };
+
+  const handleInputProductChoices = (e, i) => {
+    setProductChoices((values) => {
+      let temp = [...values];
+      temp[i][e.target.name] = e.target.value;
+      return temp;
+    });
   };
 
   const inlineTransaction = () => {
@@ -53,11 +63,16 @@ const POSPage = () => {
       <Card>
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
-          {productChoices.map((product) => (
-            <ListGroup.Item className="">
+          {productChoices.map((product, index) => (
+            <ListGroup.Item key={index} className="">
               <p className="text-truncate">{product.title}</p>
               <div className="mb-2">{product.price}</div>
-              <Form.Control value={product.quantity} />
+              <Form.Control
+                type="number"
+                name="quantity"
+                onChange={(e) => handleInputProductChoices(e, index)}
+                value={product.quantity || ""}
+              />
             </ListGroup.Item>
           ))}
         </ListGroup>
@@ -66,7 +81,6 @@ const POSPage = () => {
   };
 
   const inlineCard = (product) => {
-    product.quantity = 1;
     const { id, price, title } = product;
     return (
       <Col key={id} md={4}>
@@ -84,6 +98,7 @@ const POSPage = () => {
 
   return (
     <>
+      {JSON.stringify(productChoices)}
       <Container className="mt-4">
         <Row>
           <Col md={8}>
