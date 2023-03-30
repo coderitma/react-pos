@@ -8,7 +8,10 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
-import { helperReadableCurrency } from "../utils/helpers";
+import {
+  helperDuplicatedInArrayObject,
+  helperReadableCurrency,
+} from "../utils/helpers";
 import { FaTrash } from "react-icons/fa";
 import ProductService from "../services/ProductService";
 
@@ -35,9 +38,18 @@ const POSPage = () => {
   }, [productChoices]);
 
   const handleAddProduct = (product) => {
-    product.quantity = 1;
-    product.subtotal = 1 * product.price;
-    setProductChoices((values) => [...values, product]);
+    let isDuplicate = helperDuplicatedInArrayObject(
+      product,
+      "id",
+      productChoices
+    );
+    if (isDuplicate) {
+      alert("Produk sudah ada.");
+    } else {
+      product.quantity = 1;
+      product.subtotal = 1 * product.price;
+      setProductChoices((values) => [...values, product]);
+    }
   };
 
   const handleDeleteProduct = (product) => {
