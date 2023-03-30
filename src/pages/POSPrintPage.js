@@ -1,10 +1,67 @@
+import { useEffect } from "react";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 
 const POSPrintPage = () => {
   const location = useLocation();
-  const { data } = location.state;
+  const { productChoices, grandTotal, checkout } = location.state;
 
-  return <div>{JSON.stringify(data)}</div>;
+  useEffect(() => {
+    if (productChoices && grandTotal && checkout) {
+      window.print();
+    }
+  }, []);
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <Table>
+            <tr>
+              <th>Tanggal: {checkout.date}</th>
+            </tr>
+          </Table>
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "100px" }}>
+        <Col>
+          <Table bordered>
+            <thead>
+              <tr>
+                <th>Product Title</th>
+                <th>Product Price</th>
+                <th>Product Quantity</th>
+                <th>Product Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productChoices.map((product) => (
+                <tr>
+                  <td>{product.title}</td>
+                  <td>{product.price}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.subtotal}</td>
+                </tr>
+              ))}
+              <tr>
+                <td>Total</td>
+                <td colSpan={3} style={{ textAlign: "right" }}>
+                  {grandTotal}
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col>
+          <Button>Back</Button>
+          <Button onClick={() => window.print()} className="ms-2">
+            Print
+          </Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default POSPrintPage;

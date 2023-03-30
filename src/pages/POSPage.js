@@ -71,7 +71,13 @@ const POSPage = () => {
         setGrandTotal(0);
         let isPrint = window.confirm("Checkout berhasil, mau di print?");
         if (isPrint) {
-          navigate("/pos/print", { state: { data: productChoices } });
+          navigate("/pos/print", {
+            state: {
+              productChoices,
+              grandTotal,
+              checkout,
+            },
+          });
         }
       })
       .catch((error) => {
