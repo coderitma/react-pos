@@ -16,6 +16,7 @@ import {
 } from "../utils/helpers";
 import { FaCartPlus, FaTrash } from "react-icons/fa";
 import ProductService from "../services/ProductService";
+import AuthService from "../services/AuthService";
 
 const PPN = 0.11;
 
@@ -47,6 +48,7 @@ const POSPage = () => {
   const handleCheckoutServiceCreate = () => {
     setCheckout((values) => {
       let temp = { ...values };
+      temp.userId = AuthService.getUserFromToken().sub;
       for (const p of productChoices) {
         temp.products.push({
           productId: p.id,

@@ -13,11 +13,17 @@ const saveToken = (token) => {
 };
 
 const getToken = () => {
-  localStorage.getItem(KEY_TOKEN);
+  return localStorage.getItem(KEY_TOKEN);
 };
 
 const logout = () => {
   localStorage.setItem(KEY_TOKEN, "");
+};
+
+const getUserFromToken = () => {
+  let token = getToken();
+  let user = JSON.parse(atob(token.split(".")[1]));
+  return user;
 };
 
 export default {
@@ -25,4 +31,5 @@ export default {
   saveToken,
   getToken,
   logout,
+  getUserFromToken,
 };
