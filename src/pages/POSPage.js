@@ -86,6 +86,7 @@ const POSPage = () => {
               <Form.Control
                 type="number"
                 name="quantity"
+                isInvalid={!product.quantity || product.quantity === 0}
                 onChange={(e) => handleInputProductChoices(e, index)}
                 value={product.quantity || ""}
               />
