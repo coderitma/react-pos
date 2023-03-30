@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { FaArrowLeft, FaPrint } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const POSPrintPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { productChoices, grandTotal, checkout } = location.state;
 
@@ -54,9 +56,11 @@ const POSPrintPage = () => {
       </Row>
       <Row className="mt-4">
         <Col>
-          <Button>Back</Button>
+          <Button variant="secondary" onClick={() => navigate("/pos")}>
+            <FaArrowLeft /> Back
+          </Button>
           <Button onClick={() => window.print()} className="ms-2">
-            Print
+            <FaPrint /> Print
           </Button>
         </Col>
       </Row>
