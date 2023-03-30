@@ -17,6 +17,7 @@ import {
 import { FaCartPlus, FaTrash } from "react-icons/fa";
 import ProductService from "../services/ProductService";
 import AuthService from "../services/AuthService";
+import CheckoutService from "../services/CheckoutService";
 
 const PPN = 0.11;
 
@@ -49,6 +50,7 @@ const POSPage = () => {
     setCheckout((values) => {
       let temp = { ...values };
       temp.userId = AuthService.getUserFromToken().sub;
+      temp.products = [];
       for (const p of productChoices) {
         temp.products.push({
           productId: p.id,
@@ -57,9 +59,18 @@ const POSPage = () => {
       }
 
       let nowDate = new Date();
-      temp.date = `${nowDate.getFullYear()}-${nowDate.getMonth()}-${nowDate.getDate()}`;
+      temp.date = nowDate.toISOString().split("T")[0];
       return temp;
     });
+
+    CheckoutService.create(checkout)
+      .then((response) => {
+        alert("Checkout berhasil");
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error);
+      });
   };
 
   const handleAddProduct = (product) => {
@@ -108,8 +119,8 @@ const POSPage = () => {
           </ListGroup.Item>
 
           {productChoices.map((product, index) => (
-            <>
-              <ListGroup.Item key={index} className="">
+            <div key={index}>
+              <ListGroup.Item className="">
                 <p className="text-truncate">
                   {product.title} <br />
                   {helperReadableCurrency(product.price)} x {product.quantity}{" "}
@@ -132,7 +143,7 @@ const POSPage = () => {
                   </Button>
                 </InputGroup>
               </ListGroup.Item>
-            </>
+            </div>
           ))}
         </ListGroup>
       </Card>
@@ -165,7 +176,6 @@ const POSPage = () => {
   return (
     <>
       <Container className="mt-4">
-        {JSON.stringify(checkout)}
         <Row>
           <Col md={8}>
             <Row>{products.map((product) => inlineCard(product))}</Row>
