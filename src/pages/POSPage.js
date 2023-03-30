@@ -14,7 +14,7 @@ import {
   helperDuplicatedInArrayObject,
   helperReadableCurrency,
 } from "../utils/helpers";
-import { FaTrash } from "react-icons/fa";
+import { FaCartPlus, FaTrash } from "react-icons/fa";
 import ProductService from "../services/ProductService";
 
 const PPN = 0.11;
@@ -23,6 +23,11 @@ const POSPage = () => {
   const [products, setProducts] = useState([]);
   const [productChoices, setProductChoices] = useState([]);
   const [grandTotal, setGrandTotal] = useState(0);
+  const [checkout, setCheckout] = useState({
+    userId: 5,
+    date: "2023-02-03",
+    products: [],
+  });
 
   useEffect(() => {
     ProductService.list().then((response) => {
@@ -38,6 +43,22 @@ const POSPage = () => {
       setGrandTotal(sum);
     }
   }, [productChoices]);
+
+  const handleCheckoutServiceCreate = () => {
+    setCheckout((values) => {
+      let temp = { ...values };
+      for (const p of productChoices) {
+        temp.products.push({
+          productId: p.id,
+          quantity: p.quantity,
+        });
+      }
+
+      let nowDate = new Date();
+      temp.date = `${nowDate.getFullYear()}-${nowDate.getMonth()}-${nowDate.getDate()}`;
+      return temp;
+    });
+  };
 
   const handleAddProduct = (product) => {
     let isDuplicate = helperDuplicatedInArrayObject(
@@ -77,7 +98,12 @@ const POSPage = () => {
       <Card>
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
-          <ListGroup.Item>{helperReadableCurrency(grandTotal)}</ListGroup.Item>
+          <ListGroup.Item className="d-flex justify-content-between align-items-center">
+            {helperReadableCurrency(grandTotal)}
+            <Button onClick={handleCheckoutServiceCreate}>
+              <FaCartPlus />
+            </Button>
+          </ListGroup.Item>
 
           {productChoices.map((product, index) => (
             <>
@@ -118,6 +144,10 @@ const POSPage = () => {
         <Card
           style={{ cursor: "pointer" }}
           onClick={() => handleAddProduct(product)}>
+          <Card.Img
+            variant="top"
+            src={`https://picsum.photos/1024/400?random=${product.id}`}
+          />
           <Card.Body>
             <Card.Title className="text-truncate">{title}</Card.Title>
             <p>
@@ -133,6 +163,7 @@ const POSPage = () => {
   return (
     <>
       <Container className="mt-4">
+        {JSON.stringify(checkout)}
         <Row>
           <Col md={8}>
             <Row>{products.map((product) => inlineCard(product))}</Row>
