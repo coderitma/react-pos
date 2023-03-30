@@ -88,7 +88,6 @@ const POSPage = () => {
                   <br />
                   <Badge>{helperReadableCurrency(product.subtotal)}</Badge>
                 </p>
-                <div></div>
                 <InputGroup className="mb-3 mt-2">
                   <Form.Control
                     type="number"
@@ -121,7 +120,10 @@ const POSPage = () => {
           onClick={() => handleAddProduct(product)}>
           <Card.Body>
             <Card.Title className="text-truncate">{title}</Card.Title>
-            <p>{price}</p>
+            <p>
+              <Badge>{helperReadableCurrency(price)}</Badge>
+            </p>
+            <p className="text-truncate">{product.description}</p>
           </Card.Body>
         </Card>
       </Col>
