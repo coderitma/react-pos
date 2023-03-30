@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import {
+  Badge,
   Button,
   Card,
   Col,
   Container,
   Form,
+  InputGroup,
   ListGroup,
   Row,
 } from "react-bootstrap";
@@ -76,27 +78,34 @@ const POSPage = () => {
         <Card.Header>Transaksi</Card.Header>
         <ListGroup variant="flush">
           <ListGroup.Item>{helperReadableCurrency(grandTotal)}</ListGroup.Item>
+
           {productChoices.map((product, index) => (
-            <ListGroup.Item key={index} className="">
-              <p className="text-truncate">{product.title}</p>
-              <div className="mb-2">
-                {helperReadableCurrency(product.price)} x {product.quantity} ={" "}
-                {product.subtotal}
-              </div>
-              <Form.Control
-                type="number"
-                name="quantity"
-                isInvalid={!product.quantity || product.quantity === 0}
-                onChange={(e) => handleInputProductChoices(e, index)}
-                value={product.quantity || ""}
-              />
-              <Button
-                onClick={() => handleDeleteProduct(product)}
-                variant="outline-danger"
-                size="sm">
-                <FaTrash />
-              </Button>
-            </ListGroup.Item>
+            <>
+              <ListGroup.Item key={index} className="">
+                <p className="text-truncate">
+                  {product.title} <br />
+                  {helperReadableCurrency(product.price)} x {product.quantity}{" "}
+                  <br />
+                  <Badge>{helperReadableCurrency(product.subtotal)}</Badge>
+                </p>
+                <div></div>
+                <InputGroup className="mb-3 mt-2">
+                  <Form.Control
+                    type="number"
+                    name="quantity"
+                    isInvalid={!product.quantity || product.quantity === 0}
+                    onChange={(e) => handleInputProductChoices(e, index)}
+                    value={product.quantity || ""}
+                  />
+                  <Button
+                    onClick={() => handleDeleteProduct(product)}
+                    variant="outline-danger"
+                    size="sm">
+                    <FaTrash />
+                  </Button>
+                </InputGroup>
+              </ListGroup.Item>
+            </>
           ))}
         </ListGroup>
       </Card>
