@@ -18,10 +18,12 @@ import { FaCartPlus, FaTrash } from "react-icons/fa";
 import ProductService from "../services/ProductService";
 import AuthService from "../services/AuthService";
 import CheckoutService from "../services/CheckoutService";
+import { useNavigate } from "react-router-dom";
 
 const PPN = 0.11;
 
 const POSPage = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [productChoices, setProductChoices] = useState([]);
   const [grandTotal, setGrandTotal] = useState(0);
@@ -65,7 +67,12 @@ const POSPage = () => {
 
     CheckoutService.create(checkout)
       .then((response) => {
-        alert("Checkout berhasil");
+        setProductChoices([]);
+        setGrandTotal(0);
+        let isPrint = window.confirm("Checkout berhasil, mau di print?");
+        if (isPrint) {
+          navigate("/pos/print", { state: { data: productChoices } });
+        }
       })
       .catch((error) => {
         alert(error);
