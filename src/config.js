@@ -1,3 +1,5 @@
-export default {
-  BASE_URL: "https://fakestoreapi.com",
+const config = {
+  BASE_URL: "http://localhost:4000",
 };
+
+export default config;
