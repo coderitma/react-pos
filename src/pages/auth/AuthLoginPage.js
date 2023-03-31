@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
 
@@ -20,6 +21,23 @@ const AuthLoginPage = () => {
       })
       .catch((error) => alert(error));
   };
+
+  return (
+    <>
+      <Container>
+        <Row className="vh-100 d-flex justify-content-center align-item-center">
+          <Col md={4}>
+            <Card>
+              <Card.Img
+                variant="top"
+                src="https://picsum.photos/900/400?random=1"
+              />
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 export default AuthLoginPage;
