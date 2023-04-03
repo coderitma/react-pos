@@ -1,4 +1,5 @@
 import config from "../config";
+import AuthService from "./AuthService";
 import HTTPService from "./HTTPService";
 
 const BarangService = {};
