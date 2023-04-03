@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
+import HTTPService from "../../services/HTTPService";
+import AuthService from "../../services/AuthService";
 
 const BarangListPage = () => {
   const [daftarBarang, setDaftarBarang] = useState([]);
-  const [status, setStatus] = useState(false);
-  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    // code run here
-    setCounter(counter + 1);
-  }, [status]);
+    HTTPService.get("http://localhost:3000/barang", {
+      headers: {
+        "x-access-token": AuthService.getToken(),
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-  return <h1 onClick={() => setStatus(!status)}>Barang List Page {counter}</h1>;
+  return <h1>Barang List Page</h1>;
 };
 
 export default BarangListPage;
