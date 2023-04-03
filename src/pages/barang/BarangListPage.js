@@ -12,12 +12,12 @@ const BarangListPage = () => {
       },
     })
       .then((response) => {
-        console.log(response.data);
+        setDaftarBarang(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  return <h1>Barang List Page</h1>;
+  return <pre>{JSON.stringify(daftarBarang)}</pre>;
 };
 
 export default BarangListPage;
