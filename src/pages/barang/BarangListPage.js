@@ -6,6 +6,7 @@ import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaPlusCircle } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
+import BarangSearchInlineWidget from "../../widgets/barang/BarangSearchInlineWidget";
 
 const BarangListPage = () => {
   const [daftarBarang, setDaftarBarang] = useState([]);
@@ -29,6 +30,12 @@ const BarangListPage = () => {
 
   return (
     <NavigationWidget
+      actionTop={
+        <BarangSearchInlineWidget
+          isShowKodeBarang={true}
+          callbackBarangSearchInlineWidget={() => {}}
+        />
+      }
       buttonCreate={
         <Button>
           <FaPlusCircle /> Tambah

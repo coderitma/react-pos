@@ -3,7 +3,7 @@ import { VscAzure } from "react-icons/vsc";
 import { FaTable } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const NavigationWidget = ({ children, buttonCreate }) => {
+const NavigationWidget = ({ children, buttonCreate, actionTop }) => {
   const navigate = useNavigate();
 
   return (
@@ -14,6 +14,10 @@ const NavigationWidget = ({ children, buttonCreate }) => {
             <VscAzure className="text-primary" size={"1.5em"} />
             &nbsp;&nbsp;&nbsp;Zen App
           </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end">
+            <div className="d-flex">{actionTop}</div>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
       <Container className="mt-4">
