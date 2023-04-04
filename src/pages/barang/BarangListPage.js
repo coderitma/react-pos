@@ -28,12 +28,18 @@ const BarangListPage = () => {
     setQueryBarang((values) => ({ ...values, page }));
   };
 
+  const callbackBarangSearchInlineWidget = (query) => {
+    setQueryBarang((values) => ({ ...values, ...query }));
+  };
+
   return (
     <NavigationWidget
       actionTop={
         <BarangSearchInlineWidget
+          attr={{ variant: "secondary" }}
           isShowKodeBarang={true}
-          callbackBarangSearchInlineWidget={() => {}}
+          isShowNamaBarang={true}
+          callbackBarangSearchInlineWidget={callbackBarangSearchInlineWidget}
         />
       }
       buttonCreate={
