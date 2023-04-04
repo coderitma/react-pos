@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import HTTPService from "../../services/HTTPService";
 import AuthService from "../../services/AuthService";
-import { Card, Table } from "react-bootstrap";
+import { Button, Card, Table } from "react-bootstrap";
 import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
+import { FaPlusCircle } from "react-icons/fa";
 
 const BarangListPage = () => {
   const [daftarBarang, setDaftarBarang] = useState([]);
@@ -17,8 +18,16 @@ const BarangListPage = () => {
   }, []);
 
   return (
-    <NavigationWidget>
+    <NavigationWidget
+      buttonCreate={
+        <Button>
+          <FaPlusCircle /> Tambah
+        </Button>
+      }>
       <Card>
+        <Card.Header>
+          <h5>Daftar Barang</h5>
+        </Card.Header>
         <Table>
           <thead>
             <tr>

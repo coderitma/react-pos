@@ -3,7 +3,7 @@ import { VscAzure } from "react-icons/vsc";
 import { FaTable } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const NavigationWidget = ({ children }) => {
+const NavigationWidget = ({ children, buttonCreate }) => {
   const navigate = useNavigate();
 
   return (
@@ -19,6 +19,7 @@ const NavigationWidget = ({ children }) => {
       <Container className="mt-4">
         <Row>
           <Col md={2}>
+            {buttonCreate}
             <Nav className="flex-column">
               <Nav.Link disabled>
                 <FaTable /> Master
