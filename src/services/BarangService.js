@@ -9,7 +9,8 @@ const CONFIG_HTTP = {
   },
 };
 
-BarangService.list = () => {
+BarangService.list = (query) => {
+  CONFIG_HTTP.params = query;
   return HTTPService.get(`${config.BASE_URL}/barang`, CONFIG_HTTP);
 };
 

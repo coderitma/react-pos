@@ -5,17 +5,27 @@ import { Button, Card, Table } from "react-bootstrap";
 import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaPlusCircle } from "react-icons/fa";
+import Paginator from "../../widgets/commons/Paginator";
 
 const BarangListPage = () => {
   const [daftarBarang, setDaftarBarang] = useState([]);
+  const [paginateBarang, setPaginateBarang] = useState({});
+  const [queryBarang, setQueryBarang] = useState({ page: 1, limit: 10 });
 
   useEffect(() => {
-    BarangService.list()
+    BarangService.list(queryBarang)
       .then((response) => {
         setDaftarBarang(response.data);
+        if (response.headers.pagination) {
+          setPaginateBarang(JSON.parse(response.headers.pagination));
+        }
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [queryBarang]);
+
+  const callbackPaginator = (page) => {
+    setQueryBarang((values) => ({ ...values, page }));
+  };
 
   return (
     <NavigationWidget
@@ -25,8 +35,12 @@ const BarangListPage = () => {
         </Button>
       }>
       <Card>
-        <Card.Header>
+        <Card.Header className="d-flex justify-content-between align-items-center">
           <h5>Daftar Barang</h5>
+          <Paginator
+            paginate={paginateBarang}
+            callbackPaginator={callbackPaginator}
+          />
         </Card.Header>
         <Table>
           <thead>
