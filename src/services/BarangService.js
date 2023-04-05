@@ -14,4 +14,9 @@ BarangService.list = (query) => {
   return HTTPService.get(`${config.BASE_URL}/barang`, CONFIG_HTTP);
 };
 
+BarangService.create = (barang) => {
+  CONFIG_HTTP.params = null;
+  return HTTPService.post(`${config.BASE_URL}/barang`, barang, CONFIG_HTTP);
+};
+
 export default BarangService;
