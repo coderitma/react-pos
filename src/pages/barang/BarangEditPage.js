@@ -34,7 +34,7 @@ const BarangEditPage = () => {
     let isDelete = window.confirm("Yakin mau hapus?");
     if (isDelete) {
       BarangService.delete(kodeBarang).then(() => {
-        alert(`Berhasil mengubah data barang`);
+        alert(`Berhasil menghapus data barang`);
         navigate("/barang");
       });
     }
