@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import HTTPService from "../../services/HTTPService";
-import AuthService from "../../services/AuthService";
 import { Button, Card, Table } from "react-bootstrap";
 import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaPlusCircle } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import BarangSearchInlineWidget from "../../widgets/barang/BarangSearchInlineWidget";
+import { useNavigate } from "react-router-dom";
 
 const BarangListPage = () => {
+  const navigate = useNavigate();
   const [daftarBarang, setDaftarBarang] = useState([]);
   const [paginateBarang, setPaginateBarang] = useState({});
   const [queryBarang, setQueryBarang] = useState({ page: 1, limit: 10 });
@@ -43,7 +43,7 @@ const BarangListPage = () => {
         />
       }
       buttonCreate={
-        <Button>
+        <Button className="w-100" onClick={() => navigate("/barang/add")}>
           <FaPlusCircle /> Tambah
         </Button>
       }>
