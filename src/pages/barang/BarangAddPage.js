@@ -57,6 +57,7 @@ const BarangAddPage = () => {
             <Form.Label>Harga Beli</Form.Label>
             <Form.Control
               name="hargaBeli"
+              type="number"
               value={barang.hargaBeli || ""}
               onChange={handleInput}
             />
@@ -65,6 +66,7 @@ const BarangAddPage = () => {
             <Form.Label>Harga Jual</Form.Label>
             <Form.Control
               name="hargaJual"
+              type="number"
               value={barang.hargaJual || ""}
               onChange={handleInput}
             />
@@ -73,6 +75,7 @@ const BarangAddPage = () => {
             <Form.Label>Jumlah Barang</Form.Label>
             <Form.Control
               name="jumlahBarang"
+              type="number"
               value={barang.jumlahBarang || ""}
               onChange={handleInput}
             />
