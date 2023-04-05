@@ -3,7 +3,7 @@ import BarangService from "../../services/BarangService";
 import { useNavigate } from "react-router-dom";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { Button, Card, Form } from "react-bootstrap";
-import { FaSave } from "react-icons/fa";
+import { FaArrowLeft, FaSave } from "react-icons/fa";
 
 const BarangAddPage = () => {
   const navigate = useNavigate();
@@ -27,7 +27,13 @@ const BarangAddPage = () => {
     <NavigationWidget
       actionTop={
         <>
-          <Button>
+          <Button
+            className="me-2"
+            variant="secondary"
+            onClick={() => navigate(-1)}>
+            <FaArrowLeft /> Kembali
+          </Button>
+          <Button onClick={handleBarangServiceCreate}>
             <FaSave /> Simpan
           </Button>
         </>
