@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Table } from "react-bootstrap";
 import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaEdit, FaPlusCircle } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import BarangSearchInlineWidget from "../../widgets/barang/BarangSearchInlineWidget";
 import { useNavigate } from "react-router-dom";
@@ -63,6 +63,7 @@ const BarangListPage = () => {
               <th>Harga Jual</th>
               <th>Harga Beli</th>
               <th>Jumlah Barang</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +74,14 @@ const BarangListPage = () => {
                 <td>{barang.hargaJual}</td>
                 <td>{barang.hargaBeli}</td>
                 <td>{barang.jumlahBarang}</td>
+                <td>
+                  <Button
+                    onClick={() =>
+                      navigate(`/barang/edit/${barang.kodeBarang}`)
+                    }>
+                    <FaEdit />
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
