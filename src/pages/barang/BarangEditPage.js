@@ -23,6 +23,13 @@ const BarangEditPage = () => {
     });
   }, [kodeBarang]);
 
+  const handleBarangServiceEdit = () => {
+    BarangService.edit(kodeBarang, barang).then((response) => {
+      alert(`Berhasil mengubah data barang ${kodeBarang}`);
+      navigate("/barang");
+    });
+  };
+
   return (
     <NavigationWidget
       actionTop={
@@ -33,7 +40,7 @@ const BarangEditPage = () => {
             onClick={() => navigate(-1)}>
             <FaArrowLeft /> Kembali
           </Button>
-          <Button onClick={() => {}}>
+          <Button onClick={handleBarangServiceEdit}>
             <FaSave /> Simpan
           </Button>
         </>

@@ -27,4 +27,13 @@ BarangService.get = (kodeBarang) => {
   );
 };
 
+BarangService.edit = (kodeBarang, barang) => {
+  CONFIG_HTTP.params = null;
+  return HTTPService.put(
+    `${config.BASE_URL}/barang/${kodeBarang}`,
+    barang,
+    CONFIG_HTTP
+  );
+};
+
 export default BarangService;
