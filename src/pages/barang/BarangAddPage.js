@@ -79,6 +79,7 @@ const BarangAddPage = () => {
             <Form.Control
               name="hargaJual"
               type="number"
+              isValid={parseInt(barang.hargaJual) > 0}
               isInvalid={
                 !barang.hargaJual ||
                 parseInt(barang.hargaBeli) >= parseInt(barang.hargaJual) ||
