@@ -64,6 +64,12 @@ const BarangAddPage = () => {
             <Form.Control
               name="hargaBeli"
               type="number"
+              isValid={parseInt(barang.hargaBeli) > 0}
+              isInvalid={
+                !barang.hargaBeli ||
+                parseInt(barang.hargaBeli) >= parseInt(barang.hargaJual) ||
+                parseInt(barang.hargaBeli) === 0
+              }
               value={barang.hargaBeli || ""}
               onChange={handleInput}
             />
@@ -73,6 +79,11 @@ const BarangAddPage = () => {
             <Form.Control
               name="hargaJual"
               type="number"
+              isInvalid={
+                !barang.hargaJual ||
+                parseInt(barang.hargaBeli) >= parseInt(barang.hargaJual) ||
+                parseInt(barang.hargaJual) === 0
+              }
               value={barang.hargaJual || ""}
               onChange={handleInput}
             />
