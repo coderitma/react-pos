@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import BarangService from "../../services/BarangService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { Button, Card, Form } from "react-bootstrap";
-import { FaArrowLeft, FaSave } from "react-icons/fa";
+import { FaArrowLeft, FaSave, FaTrash } from "react-icons/fa";
 
 const BarangEditPage = () => {
   const navigate = useNavigate();
@@ -30,6 +30,16 @@ const BarangEditPage = () => {
     });
   };
 
+  const handleBarangServiceDelete = () => {
+    let isDelete = window.confirm("Yakin mau hapus?");
+    if (isDelete) {
+      BarangService.delete(kodeBarang).then(() => {
+        alert(`Berhasil mengubah data barang`);
+        navigate("/barang");
+      });
+    }
+  };
+
   return (
     <NavigationWidget
       actionTop={
@@ -39,6 +49,12 @@ const BarangEditPage = () => {
             variant="secondary"
             onClick={() => navigate(-1)}>
             <FaArrowLeft /> Kembali
+          </Button>
+          <Button
+            className="me-2"
+            variant="danger"
+            onClick={handleBarangServiceDelete}>
+            <FaTrash /> Hapus
           </Button>
           <Button onClick={handleBarangServiceEdit}>
             <FaSave /> Simpan

@@ -36,4 +36,12 @@ BarangService.edit = (kodeBarang, barang) => {
   );
 };
 
+BarangService.delete = (kodeBarang) => {
+  CONFIG_HTTP.params = null;
+  return HTTPService.delete(
+    `${config.BASE_URL}/barang/${kodeBarang}`,
+    CONFIG_HTTP
+  );
+};
+
 export default BarangService;
