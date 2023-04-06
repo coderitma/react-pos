@@ -13,6 +13,23 @@ const PemasokListPage = () => {
   const [daftarPemasok, setDaftarPemasok] = useState([]);
   const [paginatePemasok, setPaginatePemasok] = useState({});
   const [queryPemasok, setQueryPemasok] = useState({ page: 1, limit: 10 });
+
+  useEffect(() => {
+    PemasokService.list(queryPemasok).then((response) => {
+      setDaftarPemasok(response.data);
+      if (response.headers.pagination) {
+        setPaginatePemasok(JSON.parse(response.headers.pagination));
+      }
+    });
+  }, [queryPemasok]);
+
+  const callbackPaginator = (page) => {
+    setQueryPemasok((values) => ({ ...values, page }));
+  };
+
+  const callbackPemasokSearchInlineWidget = (query) => {
+    setQueryPemasok((values) => ({ ...values, ...query }));
+  };
 };
 
 export default PemasokListPage;
