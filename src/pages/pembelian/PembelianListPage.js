@@ -5,7 +5,7 @@ import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaEdit, FaPlusCircle, FaSearch } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import { useNavigate } from "react-router-dom";
-// import PembelianSearchInlineWidget from "../../widgets/pembelian/PembelianSearchInlineWidget";
+import PembelianSearchInlineWidget from "../../widgets/pembelian/PembelianSearchInlineWidget";
 
 const PembelianListPage = () => {
   const navigate = useNavigate();
@@ -32,6 +32,16 @@ const PembelianListPage = () => {
 
   return (
     <NavigationWidget
+      actionTop={
+        <PembelianSearchInlineWidget
+          attr={{ variant: "secondary" }}
+          isShowFaktur={true}
+          isShowKodePemasok={true}
+          callbackPembelianSearchInlineWidget={
+            callbackPembelianSearchInlineWidget
+          }
+        />
+      }
       buttonCreate={
         <Button className="w-100" onClick={() => navigate("/pembelian/add")}>
           <FaPlusCircle /> Tambah
