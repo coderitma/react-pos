@@ -4,6 +4,7 @@ import BarangListPage from "./pages/barang/BarangListPage";
 import BarangAddPage from "./pages/barang/BarangAddPage";
 import BarangEditPage from "./pages/barang/BarangEditPage";
 import PemasokListPage from "./pages/pemasok/PemasokListPage";
+import PemasokAddPage from "./pages/pemasok/PemasokAddPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/barang/add" element={<BarangAddPage />} />
         <Route path="/barang/edit/:kodeBarang" element={<BarangEditPage />} />
         <Route path="/pemasok" element={<PemasokListPage />} />
+        <Route path="/pemasok/add" element={<PemasokAddPage />} />
         {/* <Route path="/" element={<ContainerOutletWidget />}>
           <Route index element={<LoginPage />} />
           <Route path="/pos" element={<POSPage />} />
