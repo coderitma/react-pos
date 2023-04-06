@@ -33,6 +33,7 @@ const PembelianListPage = () => {
   const handlePembelianServiceFakturPrint = (faktur) => {
     PembelianService.fakturPrint(faktur).then((status) => {
       // TODO: add something
+      alert(status);
     });
   };
 

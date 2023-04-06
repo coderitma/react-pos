@@ -42,9 +42,9 @@ PembelianService.fakturPrint = (faktur) => {
       responseType: "blob",
       headers: CONFIG_HTTP.headers,
     })
-      .then((response) => {
-        helperHandlerExportResponse(response, resolve, "FAKTUR");
-      })
+      .then((response) =>
+        helperHandlerExportResponse(response, resolve, "FAKTUR")
+      )
       .catch((error) => reject(error));
   });
 };
