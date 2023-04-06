@@ -5,7 +5,7 @@ import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaEdit, FaPlusCircle } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import { useNavigate } from "react-router-dom";
-import PemasokSearchInlineWidget from "../../widgets/pemasok/PemasokSearchInlineWidhet";
+import PemasokSearchInlineWidget from "../../widgets/pemasok/PemasokSearchInlineWidget";
 
 const PemasokListPage = () => {
   const navigate = useNavigate();
