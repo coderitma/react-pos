@@ -3,6 +3,7 @@ import AuthLoginPage from "./pages/auth/AuthLoginPage";
 import BarangListPage from "./pages/barang/BarangListPage";
 import BarangAddPage from "./pages/barang/BarangAddPage";
 import BarangEditPage from "./pages/barang/BarangEditPage";
+import PemasokListPage from "./pages/pemasok/PemasokListPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/barang" element={<BarangListPage />} />
         <Route path="/barang/add" element={<BarangAddPage />} />
         <Route path="/barang/edit/:kodeBarang" element={<BarangEditPage />} />
+        <Route path="/pemasok" element={<PemasokListPage />} />
         {/* <Route path="/" element={<ContainerOutletWidget />}>
           <Route index element={<LoginPage />} />
           <Route path="/pos" element={<POSPage />} />

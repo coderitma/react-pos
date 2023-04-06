@@ -30,6 +30,54 @@ const PemasokListPage = () => {
   const callbackPemasokSearchInlineWidget = (query) => {
     setQueryPemasok((values) => ({ ...values, ...query }));
   };
+
+  return (
+    <NavigationWidget
+      buttonCreate={
+        <Button className="w-100" onClick={() => navigate("/pemasok/add")}>
+          <FaPlusCircle /> Tambah
+        </Button>
+      }>
+      <Card>
+        <Card.Header className="d-flex justify-content-between align-items-center">
+          <h5>Daftar Pemasok</h5>
+          <Paginator
+            paginate={paginatePemasok}
+            callbackPaginator={callbackPaginator}
+          />
+        </Card.Header>
+        <Table>
+          <thead>
+            <tr>
+              <th>Kode Pemasok</th>
+              <th>Nama Pemasok</th>
+              <th>Alamat Pemasok</th>
+              <th>Telepon Pemasok</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {daftarPemasok.map((pemasok, index) => (
+              <tr key={index}>
+                <td>{pemasok.kodePemasok}</td>
+                <td>{pemasok.namaPemasok}</td>
+                <td>{pemasok.alamatPemasok}</td>
+                <td>{pemasok.teleponPemasok}</td>
+                <td>
+                  <Button
+                    onClick={() =>
+                      navigate(`/pemasok/edit/${pemasok.kodePemasok}`)
+                    }>
+                    <FaEdit />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Card>
+    </NavigationWidget>
+  );
 };
 
 export default PemasokListPage;
