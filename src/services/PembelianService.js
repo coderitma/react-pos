@@ -1,4 +1,5 @@
 import config from "../config";
+import { helperHandlerExportResponse } from "../utils/helpers";
 import AuthService from "./AuthService";
 import HTTPService from "./HTTPService";
 
@@ -29,6 +30,23 @@ PembelianService.get = (kodePembelian) => {
     `${config.BASE_URL}/pembelian/${kodePembelian}`,
     CONFIG_HTTP
   );
+};
+
+PembelianService.fakturPrint = (faktur) => {
+  CONFIG_HTTP.query = null;
+
+  return new Promise((resolve, reject) => {
+    HTTPService({
+      url: `${config.BASE_URL}/pembelian/${faktur}/print/excel`,
+      method: "POST",
+      responseType: "blob",
+      headers: CONFIG_HTTP.headers,
+    })
+      .then((response) => {
+        helperHandlerExportResponse(response, resolve, "FAKTUR");
+      })
+      .catch((error) => reject(error));
+  });
 };
 
 export default PembelianService;

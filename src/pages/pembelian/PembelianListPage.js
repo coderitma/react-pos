@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Table } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
-import { FaEdit, FaPlusCircle, FaSearch } from "react-icons/fa";
+import { FaDownload, FaEdit, FaPlusCircle, FaSearch } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import { useNavigate } from "react-router-dom";
 import PembelianSearchInlineWidget from "../../widgets/pembelian/PembelianSearchInlineWidget";
@@ -28,6 +28,12 @@ const PembelianListPage = () => {
 
   const callbackPembelianSearchInlineWidget = (query) => {
     setQueryPembelian((values) => ({ ...values, ...query }));
+  };
+
+  const handlePembelianServiceFakturPrint = (faktur) => {
+    PembelianService.fakturPrint(faktur).then((status) => {
+      // TODO: add something
+    });
   };
 
   return (
@@ -72,8 +78,11 @@ const PembelianListPage = () => {
                 <td>{pembelian.total}</td>
                 <td>{pembelian.kodePemasok}</td>
                 <td>
-                  <Button>
-                    <FaSearch />
+                  <Button
+                    onClick={() =>
+                      handlePembelianServiceFakturPrint(pembelian.faktur)
+                    }>
+                    <FaDownload />
                   </Button>
                 </td>
               </tr>
