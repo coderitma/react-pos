@@ -6,6 +6,7 @@ import BarangEditPage from "./pages/barang/BarangEditPage";
 import PemasokListPage from "./pages/pemasok/PemasokListPage";
 import PemasokAddPage from "./pages/pemasok/PemasokAddPage";
 import PemasokEditPage from "./pages/pemasok/PemasokEditPage";
+import PembelianListPage from "./pages/pembelian/PembelianListPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           path="/pemasok/edit/:kodePemasok"
           element={<PemasokEditPage />}
         />
+        <Route path="/pembelian" element={<PembelianListPage />} />
         {/* <Route path="/" element={<ContainerOutletWidget />}>
           <Route index element={<LoginPage />} />
           <Route path="/pos" element={<POSPage />} />
