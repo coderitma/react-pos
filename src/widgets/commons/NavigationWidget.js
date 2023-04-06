@@ -29,6 +29,7 @@ const NavigationWidget = ({ children, buttonCreate, actionTop }) => {
                 <FaTable /> Master
               </Nav.Link>
               <Nav.Link onClick={() => navigate("/barang")}>Barang</Nav.Link>
+              <Nav.Link onClick={() => navigate("/pemasok")}>Pemasok</Nav.Link>
             </Nav>
           </Col>
           <Col md={10}>{children}</Col>
