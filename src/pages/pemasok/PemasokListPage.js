@@ -4,9 +4,8 @@ import PemasokService from "../../services/PemasokService";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaEdit, FaPlusCircle } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
-// TODO:
-// import BarangSearchInlineWidget from "../../widgets/barang/BarangSearchInlineWidget";
 import { useNavigate } from "react-router-dom";
+import PemasokSearchInlineWidget from "../../widgets/pemasok/PemasokSearchInlineWidhet";
 
 const PemasokListPage = () => {
   const navigate = useNavigate();
@@ -33,6 +32,14 @@ const PemasokListPage = () => {
 
   return (
     <NavigationWidget
+      actionTop={
+        <PemasokSearchInlineWidget
+          attr={{ variant: "secondary" }}
+          isShowKodePemasok={true}
+          isShowNamaPemasok={true}
+          callbackPemasokSearchInlineWidget={callbackPemasokSearchInlineWidget}
+        />
+      }
       buttonCreate={
         <Button className="w-100" onClick={() => navigate("/pemasok/add")}>
           <FaPlusCircle /> Tambah
