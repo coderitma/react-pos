@@ -1,4 +1,7 @@
+import { Button, Modal } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
+import { FaSearchPlus } from "react-icons/fa";
+import { useState } from "react";
 
 const PembelianReviewWidget = ({ attr, faktur }) => {
   const [pembelian, setPembelian] = useState();
@@ -14,6 +17,25 @@ const PembelianReviewWidget = ({ attr, faktur }) => {
   const handleFakturPrint = async () => {
     await PembelianService.fakturPrint(faktur);
   };
+
+  return (
+    <>
+      <Button {...attr} onClick={handlePembelianServiceGet}>
+        <FaSearchPlus />
+      </Button>
+
+      {pembelian && (
+        <Modal show={show} onHide={() => setShow(false)} size={"lg"}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Faktur No. {pembelian.faktur || "Nomor faktur..."}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{pembelian.kodePemasok}</Modal.Body>
+        </Modal>
+      )}
+    </>
+  );
 };
 
 export default PembelianReviewWidget;

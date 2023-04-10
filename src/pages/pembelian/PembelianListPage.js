@@ -6,6 +6,7 @@ import { FaDownload, FaEdit, FaPlusCircle, FaSearch } from "react-icons/fa";
 import Paginator from "../../widgets/commons/Paginator";
 import { useNavigate } from "react-router-dom";
 import PembelianSearchInlineWidget from "../../widgets/pembelian/PembelianSearchInlineWidget";
+import PembelianReviewWidget from "../../widgets/pembelian/PembelianReviewWidget";
 
 const PembelianListPage = () => {
   const navigate = useNavigate();
@@ -80,12 +81,13 @@ const PembelianListPage = () => {
                 <td>{pembelian.total}</td>
                 <td>{pembelian.kodePemasok}</td>
                 <td>
-                  <Button
+                  {/* <Button
                     onClick={() =>
                       handlePembelianServiceFakturPrint(pembelian.faktur)
                     }>
                     <FaDownload />
-                  </Button>
+                  </Button> */}
+                  <PembelianReviewWidget faktur={pembelian.faktur} />
                 </td>
               </tr>
             ))}
