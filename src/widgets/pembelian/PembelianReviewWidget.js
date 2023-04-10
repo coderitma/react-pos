@@ -2,7 +2,10 @@ import { Button, Modal, Table } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
 import { FaSearchPlus } from "react-icons/fa";
 import { useState } from "react";
-import { helperReadableDate } from "../../utils/helpers";
+import {
+  helperReadableCurrency,
+  helperReadableDate,
+} from "../../utils/helpers";
 
 const PembelianReviewWidget = ({ attr, faktur }) => {
   const [pembelian, setPembelian] = useState();
@@ -50,6 +53,41 @@ const PembelianReviewWidget = ({ attr, faktur }) => {
               <tr>
                 <th>Telepon Pemasok</th>
                 <td>{pembelian.pemasok.teleponPemasok}</td>
+              </tr>
+            </tbody>
+          </Table>
+
+          <Table>
+            <thead>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Harga Beli</th>
+                <th>Jumlah Beli</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pembelian.item.map((item, index) => (
+                <tr>
+                  <td>{item.kodeBarang}</td>
+                  <td>{item.namaBarang}</td>
+                  <td>{helperReadableCurrency(item.hargaBeli)}</td>
+                  <td>{item.jumlahBeli} Unit</td>
+                  <td>{helperReadableCurrency(item.subtotal)}</td>
+                </tr>
+              ))}
+              <tr>
+                <th colSpan={4}>Total</th>
+                <td>{helperReadableCurrency(pembelian.total)}</td>
+              </tr>
+              <tr>
+                <th colSpan={4}>Dibayar</th>
+                <td>{helperReadableCurrency(pembelian.dibayar)}</td>
+              </tr>
+              <tr>
+                <th colSpan={4}>Kembalian</th>
+                <td>{helperReadableCurrency(pembelian.kembali)}</td>
               </tr>
             </tbody>
           </Table>
