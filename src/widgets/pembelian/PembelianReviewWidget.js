@@ -1,6 +1,6 @@
 import { Button, Modal, Table } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
-import { FaSearchPlus } from "react-icons/fa";
+import { FaFileExcel, FaPrint, FaSearchPlus } from "react-icons/fa";
 import { useState } from "react";
 import {
   helperReadableCurrency,
@@ -91,6 +91,11 @@ const PembelianReviewWidget = ({ attr, faktur }) => {
               </tr>
             </tbody>
           </Table>
+          <Modal.Footer>
+            <Button onClick={handleFakturPrint}>
+              <FaFileExcel /> Export to Excel
+            </Button>
+          </Modal.Footer>
         </Modal>
       )}
     </>
