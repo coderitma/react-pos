@@ -69,6 +69,7 @@ const PembelianListPage = () => {
               <th>Tanggal</th>
               <th>Total</th>
               <th>Kode Pemasok</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
