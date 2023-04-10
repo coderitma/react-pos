@@ -7,6 +7,10 @@ import Paginator from "../../widgets/commons/Paginator";
 import { useNavigate } from "react-router-dom";
 import PembelianSearchInlineWidget from "../../widgets/pembelian/PembelianSearchInlineWidget";
 import PembelianReviewWidget from "../../widgets/pembelian/PembelianReviewWidget";
+import {
+  helperReadableCurrency,
+  helperReadableDate,
+} from "../../utils/helpers";
 
 const PembelianListPage = () => {
   const navigate = useNavigate();
@@ -77,8 +81,8 @@ const PembelianListPage = () => {
             {daftarPembelian.map((pembelian, index) => (
               <tr key={index}>
                 <td>{pembelian.faktur}</td>
-                <td>{pembelian.tanggal}</td>
-                <td>{pembelian.total}</td>
+                <td>{helperReadableDate(pembelian.tanggal)}</td>
+                <td>{helperReadableCurrency(pembelian.total)}</td>
                 <td>{pembelian.kodePemasok}</td>
                 <td>
                   {/* <Button

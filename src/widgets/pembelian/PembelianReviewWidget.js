@@ -2,6 +2,7 @@ import { Button, Modal, Table } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
 import { FaSearchPlus } from "react-icons/fa";
 import { useState } from "react";
+import { helperReadableDate } from "../../utils/helpers";
 
 const PembelianReviewWidget = ({ attr, faktur }) => {
   const [pembelian, setPembelian] = useState();
@@ -31,7 +32,7 @@ const PembelianReviewWidget = ({ attr, faktur }) => {
               Faktur No. {pembelian.faktur || "Nomor faktur..."}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>{pembelian.tanggal}</Modal.Body>
+          <Modal.Body>{helperReadableDate(pembelian.tanggal)}</Modal.Body>
           <Table>
             <tbody>
               <tr>

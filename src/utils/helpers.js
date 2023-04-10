@@ -30,8 +30,24 @@ const helperHandlerExportResponse = (response, resolve, filename) => {
   resolve(true);
 };
 
+const helperReadableDate = (date) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  let d = new Date(Date.parse(date));
+  return d.toLocaleDateString("id-ID", {
+    timeZone: "Asia/Jakarta",
+    ...options,
+  });
+};
+
 export {
   helperReadableCurrency,
+  helperReadableDate,
   helperDuplicatedInArrayObject,
   helperHandlerExportResponse,
 };
