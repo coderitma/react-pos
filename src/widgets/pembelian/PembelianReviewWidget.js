@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import PembelianService from "../../services/PembelianService";
 import { FaSearchPlus } from "react-icons/fa";
 import { useState } from "react";
@@ -31,7 +31,27 @@ const PembelianReviewWidget = ({ attr, faktur }) => {
               Faktur No. {pembelian.faktur || "Nomor faktur..."}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>{pembelian.kodePemasok}</Modal.Body>
+          <Modal.Body>{pembelian.tanggal}</Modal.Body>
+          <Table>
+            <tbody>
+              <tr>
+                <th>Kode Pemasok</th>
+                <td>{pembelian.pemasok.kodePemasok}</td>
+              </tr>
+              <tr>
+                <th>Nama Pemasok</th>
+                <td>{pembelian.pemasok.namaPemasok}</td>
+              </tr>
+              <tr>
+                <th>Alamat Pemasok</th>
+                <td>{pembelian.pemasok.alamatPemasok}</td>
+              </tr>
+              <tr>
+                <th>Telepon Pemasok</th>
+                <td>{pembelian.pemasok.teleponPemasok}</td>
+              </tr>
+            </tbody>
+          </Table>
         </Modal>
       )}
     </>
