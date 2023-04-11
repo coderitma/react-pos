@@ -3,7 +3,7 @@ import PembelianService from "../../services/PembelianService";
 import { useNavigate } from "react-router-dom";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
-import { Button } from "react-bootstrap";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const initPembelian = {
   faktur: null,
@@ -104,7 +104,39 @@ const PembelianAddPage = () => {
               <FaSave /> Simpan
             </Button>
           </>
-        }></NavigationWidget>
+        }>
+        <Row>
+          <Col md={7}>
+            {JSON.stringify(pembelian)}
+            <Card>
+              <Card.Header>Pembelian</Card.Header>
+              <Card.Body>
+                <Form.Group className="mt-2">
+                  <Form.Label>Faktur</Form.Label>
+                  <Form.Control
+                    name="faktur"
+                    type="text"
+                    isInvalid={!pembelian.faktur}
+                    value={pembelian.faktur || ""}
+                    onChange={handleInput}
+                  />
+                </Form.Group>
+                <Form.Group className="mt-2">
+                  <Form.Label>Tanggal</Form.Label>
+                  <Form.Control
+                    name="tanggal"
+                    type="date"
+                    isInvalid={!pembelian.tanggal}
+                    value={pembelian.tanggal || ""}
+                    onChange={handleInput}
+                  />
+                </Form.Group>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={5}>// TODO: review pembelian invoice / faktur widget</Col>
+        </Row>
+      </NavigationWidget>
     </>
   );
 };
