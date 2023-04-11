@@ -23,11 +23,11 @@ HTTPService.interceptors.response.use(
     console.log("ups", error);
 
     if (error.response.status === 403) {
-      // window.location.href = "/";
+      window.location.href = "/";
     }
 
     if (error.response.status === 401) {
-      // window.location.href = "/";
+      window.location.href = "/";
     }
 
     if (error.response.status === 400 || error.response.status === 404) {
