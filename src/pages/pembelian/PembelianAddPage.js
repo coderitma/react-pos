@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PembelianService from "../../services/PembelianService";
+import { useNavigate } from "react-router-dom";
 
 const initPembelian = {
   faktur: null,
@@ -17,8 +19,9 @@ const initPemasok = {
 };
 
 const PembelianAddPage = () => {
+  const navigate = useNavigate();
   const [pembelian, setPembelian] = useState(initPembelian);
-  const [item, setItem] = useState([]);
+  const [daftarBarang, setDaftarBarang] = useState([]);
   const [pemasok, setPemasok] = useState(initPemasok);
 
   const handleInput = (e) => {
@@ -42,6 +45,31 @@ const PembelianAddPage = () => {
     setItem((values) => {
       const result = [...values];
       result.splice(index, 1);
+      return result;
+    });
+  };
+
+  const handlePembelianServiceCreate = () => {
+    PembelianService.create(pembelian)
+      .then((response) => {
+        const printFaktur = window.confirm("Cetak faktur?");
+        if (printFaktur) {
+          PembelianService.fakturPrint(response.data.faktur);
+        }
+        navigate("/pembelian");
+      })
+      .catch((error) => {});
+  };
+
+  const callbackPemasokChoiceWidget = (data) => {
+    setPemasok(data);
+  };
+
+  const callbackBarangChoiceWidget = (data) => {
+    setDaftarBarang((values) => {
+      const result = [...values];
+      data.subtotal = data.jumlahBeli * data.hargaBeli;
+      result.push(data);
       return result;
     });
   };

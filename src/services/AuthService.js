@@ -4,7 +4,8 @@ import HTTPService from "./HTTPService";
 const ENDPOINT_LOGIN = "/users/login";
 const ENDPOINT_CHECK_TOKEN = "/hello/world";
 const KEY_LOCAL_STORAGE_TOKEN = "TOKEN";
-
+// TODO: check login
+// TODO: TypeError: Cannot read properties of undefined (reading 'data')
 const login = ({ email, password }) => {
   return HTTPService.post(`${config.BASE_URL}${ENDPOINT_LOGIN}`, {
     email,
