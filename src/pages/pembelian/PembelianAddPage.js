@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PembelianService from "../../services/PembelianService";
 import { useNavigate } from "react-router-dom";
 
@@ -27,14 +27,13 @@ const PembelianAddPage = () => {
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-
     setPembelian((values) => ({ ...values, [name]: value }));
   };
 
   const handleInputDaftarBarang = (e, index) => {
     const { name, value } = e.target;
 
-    setItem((values) => {
+    setDaftarBarang((values) => {
       const result = [...values];
       result[index][name] = value;
       return result;
@@ -73,6 +72,20 @@ const PembelianAddPage = () => {
       return result;
     });
   };
+
+  useEffect(() => {
+    let sum = 0;
+    if (daftarBarang.length > 0) {
+      for (let itemBeli of daftarBarang) {
+        sum += itemBeli.hargaBeli * parseInt(itemBeli.jumlahBeli);
+      }
+    }
+    setPembelian((values) => ({ ...values, item: daftarBarang, total: sum }));
+  }, [daftarBarang]);
+
+  useEffect(() => {
+    setPembelian((values) => ({ ...values, pemasok }));
+  }, [pemasok]);
 };
 
 export default PembelianAddPage;

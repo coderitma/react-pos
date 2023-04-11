@@ -20,8 +20,6 @@ HTTPService.interceptors.response.use(
     return res;
   },
   (error) => {
-    console.log("ups", error);
-
     if (error.response.status === 403) {
       window.location.href = "/";
     }
