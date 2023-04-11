@@ -3,15 +3,26 @@ import AuthService from "./AuthService";
 import HTTPService from "./HTTPService";
 
 const BarangService = {};
+
 const CONFIG_HTTP = {
   headers: {
     "x-access-token": AuthService.getToken(),
   },
 };
 
+const configure = (query) => {
+  return {
+    headers: {
+      "x-access-token": AuthService.getToken(),
+    },
+    params: query,
+  };
+};
+
 BarangService.list = (query) => {
-  CONFIG_HTTP.params = query;
-  return HTTPService.get(`${config.BASE_URL}/barang`, CONFIG_HTTP);
+  // CONFIG_HTTP.params = query;
+
+  return HTTPService.get(`${config.BASE_URL}/barang`, configure(query));
 };
 
 BarangService.create = (barang) => {
