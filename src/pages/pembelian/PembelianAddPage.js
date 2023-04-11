@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import PemasokChoiceWidget from "../../widgets/pemasok/PemasokChoiceWidget";
 
 const initPembelian = {
   faktur: null,
@@ -131,6 +132,16 @@ const PembelianAddPage = () => {
                     onChange={handleInput}
                   />
                 </Form.Group>
+              </Card.Body>
+            </Card>
+
+            <Card className="mt-4">
+              <Card.Header>Pemasok</Card.Header>
+              <Card.Body>
+                <PemasokChoiceWidget
+                  onlyButton={false}
+                  callbackPemasokChoiceWidget={callbackPemasokChoiceWidget}
+                />
               </Card.Body>
             </Card>
           </Col>
