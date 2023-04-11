@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import PembelianService from "../../services/PembelianService";
 import { useNavigate } from "react-router-dom";
+import NavigationWidget from "../../widgets/commons/NavigationWidget";
+import { FaArrowLeft, FaSave } from "react-icons/fa";
+import { Button } from "react-bootstrap";
 
 const initPembelian = {
   faktur: null,
@@ -86,6 +89,24 @@ const PembelianAddPage = () => {
   useEffect(() => {
     setPembelian((values) => ({ ...values, pemasok }));
   }, [pemasok]);
+
+  return (
+    <>
+      <NavigationWidget
+        actionTop={
+          <>
+            <Button
+              onClick={() => navigate("/pembelian")}
+              variant={"secondary me-2"}>
+              <FaArrowLeft /> Kembali
+            </Button>
+            <Button onClick={handlePembelianServiceCreate}>
+              <FaSave /> Simpan
+            </Button>
+          </>
+        }></NavigationWidget>
+    </>
+  );
 };
 
 export default PembelianAddPage;

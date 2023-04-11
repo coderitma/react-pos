@@ -7,6 +7,7 @@ import PemasokListPage from "./pages/pemasok/PemasokListPage";
 import PemasokAddPage from "./pages/pemasok/PemasokAddPage";
 import PemasokEditPage from "./pages/pemasok/PemasokEditPage";
 import PembelianListPage from "./pages/pembelian/PembelianListPage";
+import PembelianAddPage from "./pages/pembelian/PembelianAddPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           element={<PemasokEditPage />}
         />
         <Route path="/pembelian" element={<PembelianListPage />} />
+        <Route path="/pembelian/add" element={<PembelianAddPage />} />
         {/* <Route path="/" element={<ContainerOutletWidget />}>
           <Route index element={<LoginPage />} />
           <Route path="/pos" element={<POSPage />} />
