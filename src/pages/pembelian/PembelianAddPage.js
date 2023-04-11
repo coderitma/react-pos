@@ -31,7 +31,7 @@ const PembelianAddPage = () => {
     setPembelian((values) => ({ ...values, [name]: value }));
   };
 
-  const handleInputItem = (e, index) => {
+  const handleInputDaftarBarang = (e, index) => {
     const { name, value } = e.target;
 
     setItem((values) => {
@@ -42,7 +42,7 @@ const PembelianAddPage = () => {
   };
 
   const handleRemoveItem = (index) => {
-    setItem((values) => {
+    setDaftarBarang((values) => {
       const result = [...values];
       result.splice(index, 1);
       return result;
