@@ -36,6 +36,7 @@ HTTPService.interceptors.response.use(
       }
     }
     document.body.classList.remove("loading-indicator");
+    return Promise.reject(error);
   }
 );
 
