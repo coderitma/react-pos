@@ -33,6 +33,11 @@ const PembelianAddPage = () => {
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+
+    if (["dibayar", "jumlahBeli", "kembali"].includes(name)) {
+      value = parseInt(value);
+    }
+
     setPembelian((values) => ({ ...values, [name]: value }));
   };
 
@@ -103,7 +108,7 @@ const PembelianAddPage = () => {
         kembali: values.dibayar - values.total,
       }));
     }
-  }, [pembelian.dibayar]);
+  }, [pembelian.dibayar, daftarBarang]);
 
   useEffect(() => {
     setPembelian((values) => ({ ...values, pemasok }));
