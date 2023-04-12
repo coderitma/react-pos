@@ -106,7 +106,7 @@ const PembelianAddPage = () => {
             </Button>
           </>
         }>
-        <Row>
+        <Row className="mb-5">
           <Col md={7}>
             {JSON.stringify(pembelian)}
             <Card>
@@ -143,6 +143,11 @@ const PembelianAddPage = () => {
                   callbackPemasokChoiceWidget={callbackPemasokChoiceWidget}
                 />
               </Card.Body>
+            </Card>
+
+            <Card className="mt-4">
+              <Card.Header>Daftar Item</Card.Header>
+              <Card.Body></Card.Body>
             </Card>
           </Col>
           <Col md={5}>// TODO: review pembelian invoice / faktur widget</Col>
