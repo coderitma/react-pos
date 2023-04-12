@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PemasokService from "../../services/PemasokService";
 import { Form, InputGroup, Modal, Button, Table } from "react-bootstrap";
 import { FaArrowDown } from "react-icons/fa";
+import PemasokSearchInlineWidget from "./PemasokSearchInlineWidget";
 
 const initQuery = { page: 1, limit: 7 };
 
@@ -63,7 +64,16 @@ const PemasokChoiceWidget = ({
         <Modal.Header closeButton>
           <Modal.Title>Pilih Pemasok</Modal.Title>
         </Modal.Header>
-
+        <Modal.Body>
+          <PemasokSearchInlineWidget
+            isShowKodePemasok={true}
+            isShowNamaPemasok={true}
+            q={query}
+            callbackPemasokSearchInlineWidget={
+              callbackPemasokSearchInlineWidget
+            }
+          />
+        </Modal.Body>
         <Table>
           <thead>
             <tr>

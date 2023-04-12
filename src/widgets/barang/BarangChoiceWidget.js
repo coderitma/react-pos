@@ -3,6 +3,7 @@ import BarangService from "../../services/BarangService";
 import { Button, Modal, Table, Form, InputGroup } from "react-bootstrap";
 import { helperReadableCurrency } from "../../utils/helpers";
 import { FaArrowDown } from "react-icons/fa";
+import BarangSearchInlineWidget from "./BarangSearchInlineWidget";
 
 const initQuery = { page: 1, limit: 7 };
 const initBarang = {
@@ -65,6 +66,15 @@ const BarangChoiceWidget = ({
         <Modal.Header closeButton>
           <Modal.Title>Pilih Barang</Modal.Title>
         </Modal.Header>
+
+        <Modal.Body>
+          <BarangSearchInlineWidget
+            isShowKodeBarang={true}
+            isShowNamaBarang={true}
+            q={query}
+            callbackBarangSearchInlineWidget={callbackBarangSearchInlineWidget}
+          />
+        </Modal.Body>
 
         <Table>
           <thead>

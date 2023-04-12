@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 
@@ -7,6 +7,7 @@ const BarangSearchInlineWidget = ({
   isShowKodeBarang,
   isShowNamaBarang,
   callbackBarangSearchInlineWidget,
+  q,
 }) => {
   const [query, setQuery] = useState({ kodeBarang: "", namaBarang: "" });
 
@@ -15,6 +16,12 @@ const BarangSearchInlineWidget = ({
     const value = e.target.value;
     setQuery((values) => ({ ...values, [name]: value }));
   };
+
+  useEffect(() => {
+    if (q) {
+      setQuery((values) => ({ ...values, ...q }));
+    }
+  }, [q]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 
@@ -7,6 +7,7 @@ const PemasokSearchInlineWidget = ({
   isShowKodePemasok,
   isShowNamaPemasok,
   callbackPemasokSearchInlineWidget,
+  q,
 }) => {
   const [query, setQuery] = useState({ kodePemasok: "", namaPemasok: "" });
 
@@ -15,6 +16,12 @@ const PemasokSearchInlineWidget = ({
     const value = e.target.value;
     setQuery((values) => ({ ...values, [name]: value }));
   };
+
+  useEffect(() => {
+    if (q) {
+      setQuery((values) => ({ ...values, ...q }));
+    }
+  }, [q]);
 
   return (
     <>
