@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import PembelianService from "../../services/PembelianService";
 import { useNavigate } from "react-router-dom";
 import NavigationWidget from "../../widgets/commons/NavigationWidget";
-import { FaArrowLeft, FaSave } from "react-icons/fa";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { FaArrowLeft, FaSave, FaTrash } from "react-icons/fa";
+import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import PemasokChoiceWidget from "../../widgets/pemasok/PemasokChoiceWidget";
 import BarangChoiceWidget from "../../widgets/barang/BarangChoiceWidget";
+import { helperDuplicatedInArrayObject } from "../../utils/helpers";
 
 const initPembelian = {
   faktur: null,
@@ -70,12 +71,18 @@ const PembelianAddPage = () => {
   };
 
   const callbackBarangChoiceWidget = (data) => {
-    setDaftarBarang((values) => {
-      const result = [...values];
-      data.subtotal = data.jumlahBeli * data.hargaBeli;
-      result.push(data);
-      return result;
-    });
+    data.subtotal = 0;
+    data.jumlahBeli = 1;
+    if (helperDuplicatedInArrayObject(data, "kodeBarang", daftarBarang)) {
+      alert("Item sama.");
+    } else {
+      setDaftarBarang((values) => {
+        const result = [...values];
+        data.subtotal = data.jumlahBeli * data.hargaBeli;
+        result.push(data);
+        return result;
+      });
+    }
   };
 
   useEffect(() => {
@@ -154,7 +161,38 @@ const PembelianAddPage = () => {
                   callbackBarangChoiceWidget={callbackBarangChoiceWidget}
                 />
               </Card.Header>
-              <Card.Body></Card.Body>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Nama Barang</th>
+                    <th>Harga Jual</th>
+                    <th>Stok</th>
+                    <th>Subtotal</th>
+                    <th>Qty</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {daftarBarang.map((barang, index) => (
+                    <tr key={index}>
+                      <td title={barang.kodeBarang}>{barang.namaBarang}</td>
+                      <td>{barang.hargaBeli}</td>
+                      <td>{barang.jumlahBarang}</td>
+                      <td>{barang.subtotal}</td>
+                      <td>{barang.jumlahBeli}</td>
+                      <td>
+                        <Button
+                          title={`Hapus ${barang.kodeBarang}`}
+                          onClick={() => handleRemoveItem(index)}
+                          variant="outline-danger"
+                          size={"sm"}>
+                          <FaTrash />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
             </Card>
           </Col>
           <Col md={5}>// TODO: review pembelian invoice / faktur widget</Col>
