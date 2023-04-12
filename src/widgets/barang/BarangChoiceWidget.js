@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import BarangService from "../../services/BarangService";
+
 const initQuery = { page: 1, limit: 7 };
 const initBarang = {
   kodeBarang: null,
@@ -15,6 +18,28 @@ const BarangChoiceWidget = ({
   const [daftarBarang, setDaftarBarang] = useState([]);
   const [query, setQuery] = useState(initQuery);
   const [barangReview, setBarangReview] = useState(initBarang);
+
+  const handleBarangServiceList = () => {
+    BarangService.list(query)
+      .then((response) => {
+        setDaftarBarang(response.data);
+      })
+      .catch((error) => {});
+  };
+
+  const handleChoice = (barang) => {
+    setBarangReview(barang);
+    callbackBarangChoiceWidget(barang);
+    setShow(false);
+  };
+
+  const callbackBarangSearchInlineWidget = (q) => {
+    setQuery((values) => ({ ...values, ...q }));
+  };
+
+  useEffect(() => {
+    handleBarangServiceList();
+  }, [query]);
 };
 
 export default BarangChoiceWidget;
