@@ -5,6 +5,7 @@ import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import PemasokChoiceWidget from "../../widgets/pemasok/PemasokChoiceWidget";
+import BarangChoiceWidget from "../../widgets/barang/BarangChoiceWidget";
 
 const initPembelian = {
   faktur: null,
@@ -146,7 +147,13 @@ const PembelianAddPage = () => {
             </Card>
 
             <Card className="mt-4">
-              <Card.Header>Daftar Item</Card.Header>
+              <Card.Header className="d-flex justify-content-between align-items-center">
+                Daftar Item
+                <BarangChoiceWidget
+                  onlyButton={true}
+                  callbackBarangChoiceWidget={callbackBarangChoiceWidget}
+                />
+              </Card.Header>
               <Card.Body></Card.Body>
             </Card>
           </Col>

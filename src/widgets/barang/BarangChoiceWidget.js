@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BarangService from "../../services/BarangService";
+import { Button, Modal, Table, Form, InputGroup } from "react-bootstrap";
+import { helperReadableCurrency } from "../../utils/helpers";
+import { FaArrowDown } from "react-icons/fa";
 
 const initQuery = { page: 1, limit: 7 };
 const initBarang = {
@@ -40,6 +43,60 @@ const BarangChoiceWidget = ({
   useEffect(() => {
     handleBarangServiceList();
   }, [query]);
+
+  return (
+    <>
+      {!onlyButton && (
+        <InputGroup>
+          <Form.Control
+            type="text"
+            disabled
+            value={barangReview.namaBarang || ""}
+          />
+          <Button onClick={() => setShow(true)}>Pilih Barang</Button>
+        </InputGroup>
+      )}
+
+      {onlyButton && (
+        <Button onClick={() => setShow(true)}>Pilih Barang</Button>
+      )}
+
+      <Modal show={show} onHide={() => setShow(false)} centered size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Pilih Barang</Modal.Title>
+        </Modal.Header>
+
+        <Table>
+          <thead>
+            <tr>
+              <th>Kode Barang</th>
+              <th>Nama Barang</th>
+              <th>Harga Beli</th>
+              <th>Harga Jual</th>
+              <th>Jumlah Barang</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {daftarBarang.map((barang, index) => (
+              <tr key={index}>
+                <td>{barang.kodeBarang}</td>
+                <td>{barang.namaBarang}</td>
+                <td>{helperReadableCurrency(barang.hargaBeli)}</td>
+                <td>{helperReadableCurrency(barang.hargaJual)}</td>
+                <td>{barang.jumlahBarang}</td>
+                <td>
+                  <Button onClick={() => handleChoice(barang)}>
+                    <FaArrowDown />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Modal>
+    </>
+  );
 };
 
 export default BarangChoiceWidget;
