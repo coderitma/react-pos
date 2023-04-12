@@ -86,6 +86,7 @@ const PembelianAddPage = () => {
   };
 
   useEffect(() => {
+    console.log("useEffect");
     let sum = 0;
     if (daftarBarang.length > 0) {
       for (let itemBeli of daftarBarang) {
@@ -94,6 +95,15 @@ const PembelianAddPage = () => {
     }
     setPembelian((values) => ({ ...values, item: daftarBarang, total: sum }));
   }, [daftarBarang]);
+
+  useEffect(() => {
+    if (pembelian.dibayar > 0) {
+      setPembelian((values) => ({
+        ...values,
+        kembali: values.dibayar - values.total,
+      }));
+    }
+  }, [pembelian.dibayar]);
 
   useEffect(() => {
     setPembelian((values) => ({ ...values, pemasok }));
@@ -116,7 +126,6 @@ const PembelianAddPage = () => {
         }>
         <Row className="mb-5">
           <Col md={7}>
-            {JSON.stringify(pembelian)}
             <Card>
               <Card.Header>Pembelian</Card.Header>
               <Card.Body>
@@ -165,7 +174,7 @@ const PembelianAddPage = () => {
                 <thead>
                   <tr>
                     <th>Nama Barang</th>
-                    <th>Harga Jual</th>
+                    <th>Harga Beli</th>
                     <th>Stok</th>
                     <th>Subtotal</th>
                     <th>Qty</th>
@@ -179,7 +188,14 @@ const PembelianAddPage = () => {
                       <td>{barang.hargaBeli}</td>
                       <td>{barang.jumlahBarang}</td>
                       <td>{barang.subtotal}</td>
-                      <td>{barang.jumlahBeli}</td>
+                      <td>
+                        <Form.Control
+                          name="jumlahBeli"
+                          type="number"
+                          value={barang.jumlahBeli || 1}
+                          onChange={(e) => handleInputDaftarBarang(e, index)}
+                        />
+                      </td>
                       <td>
                         <Button
                           title={`Hapus ${barang.kodeBarang}`}
@@ -195,7 +211,39 @@ const PembelianAddPage = () => {
               </Table>
             </Card>
           </Col>
-          <Col md={5}>// TODO: review pembelian invoice / faktur widget</Col>
+          <Col md={5}>
+            <Card>
+              <Card.Header>Pembayaran</Card.Header>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Total</th>
+                    <th>{pembelian.total}</th>
+                  </tr>
+                  <tr>
+                    <th>Kembali</th>
+                    <th
+                      className={
+                        pembelian.kembali < 0 ? "text-danger" : "text-success"
+                      }>
+                      {pembelian.kembali}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Dibayar</th>
+                    <th>
+                      <Form.Control
+                        name="dibayar"
+                        type="number"
+                        value={pembelian.dibayar || 0}
+                        onChange={handleInput}
+                      />
+                    </th>
+                  </tr>
+                </thead>
+              </Table>
+            </Card>
+          </Col>
         </Row>
       </NavigationWidget>
     </>

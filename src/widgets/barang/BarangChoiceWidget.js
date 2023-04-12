@@ -62,7 +62,7 @@ const BarangChoiceWidget = ({
         <Button onClick={() => setShow(true)}>Pilih Barang</Button>
       )}
 
-      <Modal show={show} onHide={() => setShow(false)} centered size="lg">
+      <Modal show={show} onHide={() => setShow(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Pilih Barang</Modal.Title>
         </Modal.Header>
@@ -76,7 +76,7 @@ const BarangChoiceWidget = ({
           />
         </Modal.Body>
 
-        <Table>
+        <Table responsive>
           <thead>
             <tr>
               <th>Kode Barang</th>
