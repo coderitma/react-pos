@@ -6,7 +6,10 @@ import { FaArrowLeft, FaSave, FaTrash } from "react-icons/fa";
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import PemasokChoiceWidget from "../../widgets/pemasok/PemasokChoiceWidget";
 import BarangChoiceWidget from "../../widgets/barang/BarangChoiceWidget";
-import { helperDuplicatedInArrayObject } from "../../utils/helpers";
+import {
+  helperDuplicatedInArrayObject,
+  helperHandleZero,
+} from "../../utils/helpers";
 
 const initPembelian = {
   faktur: null,
@@ -43,12 +46,9 @@ const PembelianAddPage = () => {
 
   const handleInputDaftarBarang = (e, index) => {
     const { name, value } = e.target;
-
-    setDaftarBarang((values) => {
-      const result = [...values];
-      result[index][name] = value;
-      return result;
-    });
+    setDaftarBarang((values) =>
+      helperHandleZero(name, value, index, values, "hargaBeli")
+    );
   };
 
   const handleRemoveItem = (index) => {
@@ -197,7 +197,7 @@ const PembelianAddPage = () => {
                         <Form.Control
                           name="jumlahBeli"
                           type="number"
-                          value={barang.jumlahBeli || 1}
+                          value={barang.jumlahBeli}
                           onChange={(e) => handleInputDaftarBarang(e, index)}
                         />
                       </td>

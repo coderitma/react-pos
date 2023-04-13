@@ -45,9 +45,22 @@ const helperReadableDate = (date) => {
   });
 };
 
+const helperHandleZero = (name, value, index, values, key) => {
+  const result = [...values];
+  if (value * result[index][key] <= 0) {
+    alert("Jumlah pembelian jangan sampai 0");
+  } else {
+    result[index].subtotal = value * result[index][key];
+    result[index][name] = parseInt(value);
+  }
+
+  return result;
+};
+
 export {
   helperReadableCurrency,
   helperReadableDate,
   helperDuplicatedInArrayObject,
   helperHandlerExportResponse,
+  helperHandleZero,
 };
