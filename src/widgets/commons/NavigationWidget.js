@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, Col, Row } from "react-bootstrap";
 import { VscAzure } from "react-icons/vsc";
-import { FaCartPlus, FaTable } from "react-icons/fa";
+import { FaCartPlus, FaChartArea, FaTable } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const NavigationWidget = ({ children, buttonCreate, actionTop }) => {
@@ -35,6 +35,12 @@ const NavigationWidget = ({ children, buttonCreate, actionTop }) => {
               </Nav.Link>
               <Nav.Link onClick={() => navigate("/pembelian")}>
                 Pembelian
+              </Nav.Link>
+              <Nav.Link disabled>
+                <FaChartArea /> Laporan
+              </Nav.Link>
+              <Nav.Link onClick={() => navigate("/reporting/pembelian")}>
+                Laporan Pembelian
               </Nav.Link>
             </Nav>
           </Col>
