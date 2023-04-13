@@ -4,6 +4,7 @@ import NavigationWidget from "../../widgets/commons/NavigationWidget";
 import { Button, Card, Form } from "react-bootstrap";
 import { FaDownload } from "react-icons/fa";
 import ReportingService from "../../services/ReportingService";
+import BarangChoiceWidget from "../../widgets/barang/BarangChoiceWidget";
 
 export default () => {
   const [reportingPembelian, setReportingPembelian] = useState({
@@ -22,6 +23,10 @@ export default () => {
     await ReportingService.reportPembelianPeriodExcel(reportingPembelian);
   };
 
+  const callbackBarangChoiceWidget = ({ kodeBarang }) => {
+    setReportingPembelian((values) => ({ ...values, kodeBarang }));
+  };
+
   return (
     <NavigationWidget
       actionTop={
@@ -36,17 +41,12 @@ export default () => {
           <h5>Laporan Pembelian</h5>
         </Card.Header>
         <Card.Body>
-          <Form.Group>
-            <Form.Label>Kode Barang</Form.Label>
-            <Form.Control
-              name="kodeBarang"
-              type="text"
-              value={reportingPembelian.kodeBarang || ""}
-              onChange={handleInput}
-            />
-          </Form.Group>
+          <BarangChoiceWidget
+            onlyButton={false}
+            callbackBarangChoiceWidget={callbackBarangChoiceWidget}
+          />
           <Form.Group className="mt-3">
-            <Form.Label>Kode Barang</Form.Label>
+            <Form.Label>Dari Tanggal</Form.Label>
             <Form.Control
               name="fromTanggal"
               type="date"
@@ -55,7 +55,7 @@ export default () => {
             />
           </Form.Group>
           <Form.Group className="mt-3">
-            <Form.Label>Kode Barang</Form.Label>
+            <Form.Label>Sampai Tanggal</Form.Label>
             <Form.Control
               name="toTanggal"
               type="date"
